@@ -1,0 +1,22 @@
+[user]
+	name    = Antoine Laurent
+	email   = antoine@famille-laurent.com
+    editor  = vim
+#    signingkey = F97E4B08
+[color]
+    ui         = true
+[alias]
+    lol        = log --decorate --graph --oneline
+    loll       = log --decorate --graph --oneline --all
+    st         = status -s
+    co         = checkout
+    br         = branch
+    mernff     = merge --no-ff
+    punff      = pull --no-ff
+    samend     = commit --amend --no-edit
+    whatsnew   = fetch --dry-run
+    show       = show --show-signature
+[merge]
+    tool       = vimdiff
+
+# vim:filetype=gitconfig:
