@@ -1,0 +1,18 @@
+[submodule "vim/vim-plug"]
+	path = vim/vim-plug
+	url = https://github.com/junegunn/vim-plug.git
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = https://github.com/lcpz/lain.git
+[submodule "awesome/awesome-copycats"]
+	path = awesome/awesome-copycats
+	url = https://github.com/lcpz/awesome-copycats.git
+[submodule "awesome/penlight"]
+	path = awesome/penlight
+	url = https://github.com/stevedonovan/Penlight.git
+[submodule "awesome/revelation"]
+	path = awesome/revelation
+	url = https://github.com/guotsuan/awesome-revelation.git
+[submodule "awesome/themes"]
+	path = awesome/themes
+	url = https://github.com/sim590/awesome-themes.git
