@@ -23,7 +23,7 @@ markup = lain.util.markup
 mytextclock = awful.widget.textclock(" %a %d %b  %H:%M", 10)--awful.widget.textclock(blue .. "%a %d %b %y" .. coloff .. grey .. " > " .. coloff .. red .. "%I:%M %p" .. coloff) --awful.widget.textclock(" %a %d %b  %H:%M", 10)
 
 -- calendar
-lain.widgets.calendar.attach(mytextclock, { font = "Inconsolata", font_size = 10 })
+lain.widget.calendar.attach(mytextclock, { font = "Inconsolata", font_size = 10 })
 
 -- {{ Time and Date Widget }} --
 tdwidget = wibox.widget.textbox()
@@ -41,7 +41,7 @@ vicious.register(tdwidget, vicious.widgets.date, '<span font="Inconsolata 11" co
 --{{ Battery Widget }} --
 -- TODO: check if displayed info is consistent with multiple batteries
 baticon = wibox.widget.imagebox(beautiful.widget_battery)--wibox.widget.imagebox(beautiful.widget_battery)
-batwidget = lain.widgets.bat({
+batwidget = lain.widget.bat({
     batteries = {"BAT0", "BAT1"},
     settings = function()
         if bat_now.status == "Charging" then
@@ -66,7 +66,7 @@ batwidget = lain.widgets.bat({
 -- TODO: trouver la version de lain pour pas que ça plante.
 -- {{ Volume Widget }} --
 volicon = wibox.widget.imagebox(beautiful.widget_vol)
-volumewidget = lain.widgets.alsa({
+volumewidget = lain.widget.alsa({
     settings = function()
         if volume_now.status == "off" then
             volicon:set_image(beautiful.widget_vol_mute)
@@ -86,7 +86,7 @@ volumewidget = lain.widgets.alsa({
 -- Mail IMAP check
 -- mailicon = wibox.widget.imagebox(beautiful.widget_mail)
 -- mailicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
--- mailwidget = wibox.widget.background(lain.widgets.imap({
+-- mailwidget = wibox.widget.background(lain.widget.imap({
 --     timeout  = 180,
 --     server   = "imap.gmail.com",
 --     mail     = "", -- TODO use `pass` to get password from encrypted files.
@@ -114,7 +114,7 @@ volumewidget = lain.widgets.alsa({
 -- end)
 mpdicon = wibox.widget.imagebox(beautiful.widget_music)
 mpdicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.spawn_with_shell(terminal_cmd .. mpdclient) end)))
-mpdwidget = lain.widgets.mpd({
+mpdwidget = lain.widget.mpd({
     music_dir = home_dir .. "/Musique",
     password = "q1w2e3r4", -- TODO use `pass` to get password from encrypted files.
     -- password = mpd_pass,
@@ -135,7 +135,7 @@ mpdwidget = lain.widgets.mpd({
         widget:set_markup(markup("#EA6F81", artist) .. title)
     end
 })
-mpdwidgetbg = wibox.container.background(mpdwidget, "#313131")
+-- mpdwidgetbg = wibox.container.background(mpdwidget, "#313131")
 -- local glib = require( "lgi" ).GLib
 -- glib.idle_add(glib.PRIORITY_HIGH_IDLE, function() mpdwidget.password = io.popen():lines()() end)
 -- end
