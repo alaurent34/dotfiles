@@ -2,7 +2,7 @@ local awful         = require("awful")
 -- local screen        = require("screen") INUTILE
 local naughty       = require("naughty")
 local menubar       = require("menubar")
---local revelation  = require("revelation")
+local revelation  = require("revelation")
 local gears         = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
@@ -46,13 +46,13 @@ globalkeys = awful.util.table.join(
             pkill(redshift)
         end
     end),
---    awful.key({modkey,	          }, "F1", function ()
+    awful.key({modkey,	          }, "F1", function ()
 			-- go around the bug:
 			-- https://github.com/guotsuan/awesome-revelation/issues/29
---			if screen:count() == 1 then
---				revelation()
---			end
---		end),
+			if screen:count() == 1 then
+				revelation()
+			end
+		end),
     -- {{ Window control }}
     ---------------------------------------------------------------------
     --  Makes window floating with reasonable 700x475 pixels geometry  --

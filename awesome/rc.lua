@@ -11,6 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+local revelation  = require("revelation")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -49,6 +51,7 @@ require("rc.utils") -- variables, utility functions...
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 beautiful.init(themes_dir .. "/" .. my_theme .. "/" .. "theme.lua") -- theme
+revelation.init()
 
 -- require("rc.synergy") -- starts synergy on multiple computers using ssh
 require("rc.keys")    -- key bindings

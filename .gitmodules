@@ -16,3 +16,6 @@
 [submodule "awesome/themes"]
 	path = awesome/themes
 	url = https://github.com/sim590/awesome-themes.git
+[submodule "awesome/awesome-revelation"]
+	path = awesome/awesome-revelation
+	url = https://github.com/guotsuan/awesome-revelation
