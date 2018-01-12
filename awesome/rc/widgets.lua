@@ -38,14 +38,39 @@ theme.cal = lain.widget.calendar({
 tdwidget = wibox.widget.textbox()
 vicious.register(tdwidget, vicious.widgets.date, '<span font="Inconsolata 11" color="#AAAAAA" background="#1F2428"> %A, %b %d %H:%M </span>', 20)
 
--- Coretemp
--- TODO
---tempicon = wibox.widget.imagebox(beautiful.widget_temp)
---tempwidget = lain.widgets.temp({
-    --settings = function()
-        --widget:set_text(" " .. coretemp_now .. "°C ")
-    --end
---})
+--{{ Coretemp }} --
+tempicon = wibox.widget.imagebox(beautiful.widget_temp)
+tempwidget = lain.widget.temp({
+    settings = function()
+        widget:set_markup(markup.font(theme.font, " " .. coretemp_now .. "°C "))
+    end
+})
+
+--{{ Memory }} --
+memicon = wibox.widget.imagebox(beautiful.widget_mem)
+memwidget = lain.widget.mem({
+    settings = function()
+        widget:set_markup(markup.font(theme.font, " " .. mem_now.used .. "MB "))
+    end
+})
+
+--{{ CPU Load }}
+cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
+cpuwidget = lain.widget.cpu({
+    settings = function()
+        widget:set_markup(markup.font(theme.font, " " .. cpu_now.usage .. "% "))
+    end
+})
+--{{ Storage }} -- 
+fsicon = wibox.widget.imagebox(beautiful.widget_hdd)
+theme.fs = lain.widget.fs({
+    options  = "--exclude-type=tmpfs",
+    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "xos4 Terminus 10" },
+    settings = function()
+        widget:set_markup(markup.font(theme.font, " " .. fs_now.used .. "% "))
+    end
+})
+
 
 --{{ Battery Widget }} --
 -- TODO: check if displayed info is consistent with multiple batteries
