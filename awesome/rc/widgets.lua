@@ -7,20 +7,10 @@ local vicious   = require("vicious")
 
 require("rc.utils")
 
--- {{{ Colors
--- coloff  = "</span>"
--- red     = "<span color='" .. beautiful.fg_red     .. "'>"
--- green   = "<span color='" .. beautiful.fg_green   .. "'>"
--- yellow  = "<span color='" .. beautiful.fg_yellow  .. "'>"
--- blue    = "<span color='" .. beautiful.fg_blue    .. "'>"
--- magenta = "<span color='" .. beautiful.fg_magenta .. "'>"
--- grey    = "<span color='" .. beautiful.fg_grey    .. "'>"
--- white   = "<span color='" .. beautiful.fg_white   .. "'>"
-
 -- {{{ Wibox
 markup = lain.util.markup
 -- Textclock
-mytextclock = awful.widget.textclock(" %a %d %b  %H:%M", 10)--awful.widget.textclock(blue .. "%a %d %b %y" .. coloff .. grey .. " > " .. coloff .. red .. "%I:%M %p" .. coloff) --awful.widget.textclock(" %a %d %b  %H:%M", 10)
+mytextclock = awful.widget.textclock(" %a %d %b  %H:%M", 10)
 
 -- calendar
 lain.widget.calendar.attach(mytextclock, { font = "Inconsolata", font_size = 10 })
@@ -40,7 +30,7 @@ vicious.register(tdwidget, vicious.widgets.date, '<span font="Inconsolata 11" co
 
 --{{ Battery Widget }} --
 -- TODO: check if displayed info is consistent with multiple batteries
-baticon = wibox.widget.imagebox(beautiful.widget_battery)--wibox.widget.imagebox(beautiful.widget_battery)
+baticon = wibox.widget.imagebox(beautiful.widget_battery)
 batwidget = lain.widget.bat({
     batteries = {"BAT0", "BAT1"},
     settings = function()
