@@ -10,10 +10,29 @@ require("rc.utils")
 -- {{{ Wibox
 markup = lain.util.markup
 -- Textclock
-mytextclock = awful.widget.textclock(" %a %d %b  %H:%M", 10)
+-- mytextclock = awful.widget.textclock(" %a %d %b  %H:%M", 10)
 
 -- calendar
-lain.widget.calendar.attach(mytextclock, { font = "Inconsolata", font_size = 10 })
+-- lain.widget.calendar.attach(mytextclock, { font = "Inconsolata", font_size = 10 })
+
+--{{ Textclock }}
+mytextclock = awful.widget.watch(
+    "date +'%a %d %b, %R'", 60,
+    function(widget, stdout)
+        widget:set_markup(" " .. markup.font(theme.font, stdout))
+    end
+)
+
+--{{ Calendar }}
+theme.cal = lain.widget.calendar({
+    attach_to = { mytextclock },
+    notification_preset = {
+        font = "xos4 Terminus 10",
+        fg   = theme.fg_normal,
+        bg   = theme.bg_normal
+    }
+})
+
 
 -- {{ Time and Date Widget }} --
 tdwidget = wibox.widget.textbox()

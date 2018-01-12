@@ -123,7 +123,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+-- mytextclock = wibox.widget.textclock()
 
 local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -249,6 +249,7 @@ awful.screen.connect_for_each_screen(function(s)
             batwidget,
             arrl_ld,
             arrl_dl,
+            clockicon,
             mytextclock,
             arrl_ld,
             s.mylayoutbox,
