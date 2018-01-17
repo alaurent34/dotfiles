@@ -35,3 +35,6 @@ c.spellcheck.languages = ["fr-FR", "en-CA"]
 ## passthrough allow ctrl-v for pasting clipboard
 config.unbind('<ctrl-v>', mode='passthrough')
 config.bind('<ctrl-z>','leave-mode', mode='passthrough')
+
+#netflix
+c.qt.args = ['ppapi-widevine-path=/usr/lib/qt/plugins/ppapi/libwidevinecdmadapter.so']
