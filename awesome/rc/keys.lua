@@ -38,7 +38,9 @@ globalkeys = awful.util.table.join(
     awful.key({			  }, "Print", function () awful.spawn("gnome-screenshot -i") end),
     --awful.key({			  }, "XF86TouchpadToggle", function () awful.spawn("/home/simon/bin/toggle-touchpad") end),
     awful.key({	          }, "XF86MonBrightnessUp", function () awful.spawn("light -A 15") end),
+    awful.key({ modkey, "Shift" }, "ç", function () awful.spawn("light -A 15") end),
     awful.key({	          }, "XF86MonBrightnessDown", function () awful.spawn("light -U 15") end),
+    awful.key({ modkey, "Shift" }, "0xfe52", function () awful.spawn("light -U 15") end),
     awful.key({	          }, "F9", function ()
         if not pgrep(redshift) then
             awful.spawn(redshift)
@@ -69,9 +71,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, }, "F7", xrandr.xrandr),
     -- {{ Volume Control }} --
     awful.key({     }, "XF86AudioRaiseVolume", function() awful.spawn.with_shell(pamixer .. " " .. "-i 5") end),
+    awful.key({ modkey, "Shift" }, ".", function() awful.spawn.with_shell(pamixer .. " " .. "-i 5") end),
     awful.key({     }, "XF86AudioLowerVolume", function() awful.spawn.with_shell(pamixer .. " " .. "-d 5") end),
+    awful.key({ modkey, "Shift" }, ",", function() awful.spawn.with_shell(pamixer .. " " .. "-d 5") end),
     awful.key({     }, "XF86AudioMute", function() awful.spawn.with_shell(pamixer .. " " .. "-t") end),
+    awful.key({ modkey, "Shift" }, ";", function() awful.spawn.with_shell(pamixer .. " " .. "-t") end),
     awful.key({     }, "XF86AudioMicMute", function() awful.spawn("amixer set Capture toggle") end),
+    awful.key({ modkey, "Shift" }, "è", function() awful.spawn("amixer set Capture toggle") end),
     --
     -- {{ music }} --
 
