@@ -27,6 +27,24 @@ c.url.searchengines = {
 
 c.spellcheck.languages = ["fr-FR", "en-CA"]
 
+#################
+#     FONTS     #
+################
+
+font_size = "9pt"
+c.fonts.completion.category = "bold "+font_size+" monospace"
+c.fonts.completion.entry = font_size+" monospace"
+c.fonts.debug_console = font_size+" monospace"
+c.fonts.downloads = font_size+" monospace"
+c.fonts.hints = "bold "+font_size+" monospace"
+c.fonts.keyhint = font_size+" monospace"
+c.fonts.messages.error = font_size+" monospace"
+c.fonts.messages.info = font_size+" monospace"
+c.fonts.messages.warning = font_size+" monospace"
+c.fonts.prompts = font_size+" sans-serif"
+c.fonts.statusbar = font_size+" monospace"
+c.fonts.tabs = font_size+" monospace"
+
 ##################
 #  KEY BINDINGS  #
 ##################
