@@ -22,7 +22,8 @@ mytextclock = awful.widget.watch(
 theme.cal = lain.widget.calendar({
     attach_to = { mytextclock },
     notification_preset = {
-        font = "xos4 Terminus 10",
+        font = "Inconsolata",
+        font_size = 11,
         fg   = theme.fg_normal,
         bg   = theme.bg_normal
     }
@@ -56,11 +57,12 @@ cpuwidget = lain.widget.cpu({
         widget:set_markup(markup.font(theme.font, " " .. cpu_now.usage .. "% "))
     end
 })
+
 --{{ Storage }} -- 
 fsicon = wibox.widget.imagebox(beautiful.widget_hdd)
 theme.fs = lain.widget.fs({
     options  = "--exclude-type=tmpfs",
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "xos4 Terminus 10" },
+    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Inconsolata", font_size = 9},
     settings = function()
         widget:set_markup(markup.font(theme.font, " " .. fs_now.used .. "% "))
     end
