@@ -129,6 +129,8 @@ set number
 " Enable relative number
 set relativenumber
 
+set showcmd
+
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
