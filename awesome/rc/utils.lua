@@ -13,7 +13,7 @@ my_theme   = "powerarrow-darker"--"multicolor" -- "powerarrow-darker"
 -- This is used later as the default terminal and editor to run.
 terminal     = "urxvt"
 terminal_cmd = terminal .. " -e "
-editor       = os.getenv("EDITOR") or "nvim"
+editor       = os.getenv("EDITOR") or "vim"
 editor_cmd   = terminal_cmd .. editor
 -- TODO: use pass for safely getting password
 mpd_remote   = "env MPD_HOST=q1w2e3r4@/home/simon/.mpd/socket mpc"
