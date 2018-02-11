@@ -326,6 +326,13 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim diff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>U :diffupdate<CR>
+vnoremap <silent> <leader>dp :diffput<CR>
+vnoremap <silent> <leader>do :diffget<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
