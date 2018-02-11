@@ -1,6 +1,6 @@
 SUBDIRS = awesome qutebrowser vim ranger#ncmpcpp beets
 
-DOTFILES = gitconfig vimrc Xresources Xmodmap #tigrc
+DOTFILES = gitconfig vimrc Xresources Xmodmap zshrc zshrc.local#tigrc
 DEST_LINKS = $(addprefix $(HOME)/.,$(DOTFILES))
 
 .PHONY: all links subdirs clean
