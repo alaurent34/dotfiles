@@ -17,6 +17,7 @@ PATH=$PATH:~/bin/
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export AURDEST=~/aur/other
+export BROWSER=qutebrowser
 
 stty -ixon
 
