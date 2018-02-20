@@ -1,0 +1,29 @@
+## IMAP: offlineimap
+set mbox_type = Maildir
+set folder = "~/mail/gmail"
+source ~/.mutt/mailboxes
+set spoolfile = "+/INBOX"
+set record = "+/INBOX.Sent"
+set postponed = "+/INBOX.Drafts"
+set mbox="+mbox"
+
+## Send options.
+set realname='Antoine Laurent'
+
+set sendmail='/usr/bin/msmtp -a ovh'
+set from=antoine@famille-laurent.com
+
+## Hook -- IMPORTANT!
+account-hook $folder "source ~/.mutt/mailboxes"
+
+## Keybinding ##
+macro index gi \
+    "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index gt \
+    "<change-folder>=INBOX.Sent<enter>" "Go to sent Mail"
+macro index gd \
+    "<change-folder>=INBOX.Drafts<enter>" "Go to drafts"
+macro index gs \
+    "<change-folder>=INBOX.Junk<enter>" "Go to Spam"
+
+# vim: ft=muttrc

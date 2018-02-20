@@ -1,0 +1,83 @@
+# vim: ft=muttrc
+
+#-------------------------------------------------------------
+## Navigation
+#-------------------------------------------------------------
+# Vi-like keybindings
+bind index,pager         \#        noop
+bind index,pager         \&        noop
+bind index               i         noop
+bind generic             z         noop
+bind index,pager,attach  g         noop
+bind index,pager         s         noop
+bind index,pager         c         noop
+bind generic,pager       t         noop
+
+bind  index          l display-message
+bind  index          h limit
+bind  index,pager    H display-toggle-weed
+bind  pager          h exit
+bind  pager          j next-line
+bind  pager          k previous-line
+bind  pager          l view-attachments
+bind  attach,compose l view-attach
+bind  attach         h exit
+bind  attach         H display-toggle-weed
+bind  compose        l view-attach
+bind  editor         <delete>  delete-char
+
+bind index gg first-entry
+bind index G  last-entry
+bind pager q  toggle-quoted
+bind pager /  search
+bind pager k  previous-line
+bind pager gg top
+bind pager G  bottom
+bind index,pager a  group-reply
+bind index,pager         N         search-opposite
+
+bind generic,index,pager \Cf       next-page
+bind generic,index,pager \Cb       previous-page
+bind generic,pager       \Ca       previous-line
+bind generic,index,pager \Ce       next-line
+bind generic,index,pager \Cd       half-down
+bind generic,index,pager \Cu       half-up
+bind generic             zt        current-top
+bind generic             zz        current-middle
+bind generic             zb        current-bottom
+bind index               za        collapse-thread
+bind index               zA        collapse-all
+bind index               <Backtab> previous-new-then-unread
+
+# Sidebar
+bind  index,pager    \CP sidebar-prev
+bind  index,pager    \CN sidebar-next
+bind  index,pager    \CO sidebar-open
+macro index,pager    b   '<enter-command>toggle sidebar_visible<enter>'
+bind  index          B   bounce-message
+
+#--------------------------------------------------------------
+## Actions
+#-------------------------------------------------------------
+# Switching mailbox
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+macro index g1 \
+    "<change-folder>~/mail/uqam/INBOX<enter>" "Go to inbox UQAM"
+macro index g2 \
+    "<change-folder>~/mail/perso/INBOX<enter>" "Go to inbox Perso"
+macro index g3 \
+    "<change-folder>~/mail/gmail/INBOX<enter>" "Go to inbox Gmail"
+
+macro index,pager    ,d  "<delete-message><sync-mailbox><enter>"                        "direct delete"
+macro index,pager    ,t "<delete-thread><sync-mailbox>"                                 "move thread to trash"
+macro index,pager    ,w  "<sync-mailbox>"                                               "synch mailbox"
+macro index          ,z  "<shell-escape>pkill -SIGQUIT offlineimap<enter>"              "sync IMAP"
+bind  generic        tt  tag-entry
+bind  index          tat tag-thread
+bind  pager          tt  tag-message
+macro pager          tat "<exit><mark-message>q<enter><tag-thread>'q<display-message>"  "tag-thread"
+macro index,pager    gx  "<pipe-message>urlview<Enter>"                                 "call urlview to extract URLs out of a message"
+macro attach,compose gx  "<pipe-entry>urlview<Enter>"                                   "call urlview to extract URLs out of a message" 
+
+# hmtl mail opening
+# macro attach 'V' "<pipe-entry>cat >~/.mutt/cache/mail.html && qutebrowser ~/.mutt/cache/mail.html && sleep 1 && rm ~/.mutt/cache/*<enter>"

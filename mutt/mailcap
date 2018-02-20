@@ -1,0 +1,45 @@
+# TEXT
+text/plain; vim %s ;
+# HTML
+text/html; qutebrowser  %s &; test=/home/drayer34/bin/mutt/RunningX; needsterminal;
+text/html; elinks -dump ; copiousoutput;
+application/pgp-encrypted; gpg --decrypt ; copiousoutput;
+
+# PDF
+image/pdf; /home/drayer34/bin/mutt/bgrun okular %s; test=/home/drayer34/bin/mutt/RunningX
+application/pdf; /home/drayer34/bin/mutt/bgrun okular %s; test=/home/drayer34/bin/mutt/RunningX
+application/pdf; pdftotext %s -; copiousoutput
+
+# OFFICE
+## text document
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; /home/drayer34/bin/mutt/bgrun lowriter %s; test=/home/drayer34/bin/mutt/RunningX
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; /home/drayer34/bin/mutt/word2text %s; copiousoutput
+application/msword; /home/drayer34/bin/mutt/bgrun lowriter %s; test=/home/drayer34/bin/mutt/RunningX
+application/msword; /home/drayer34/bin/mutt/word2text %s; copiousoutput
+application/vnd.oasis.opendocument.text;          /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/vnd.oasis.opendocument.text;          word2text %s; copiousoutput
+application/vnd.msword;         /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/vnd.msword;         word2text %s; copiousoutput
+## spreadsheet
+application/excel;              /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/excel;              /home/drayer34/bin/mutt/excel2text %s; copiousoutput
+application/msexcel;            /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/msexcel;            /home/drayer34/bin/mutt/excel2text %s; copiousoutput
+application/vnd.ms-excel;       /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/vnd.ms-excel;       /home/drayer34/bin/mutt/excel2text %s; copiousoutput
+application/x-excel;            /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/x-excel;            /home/drayer34/bin/mutt/excel2text %s; copiousoutput
+application/x-msexcel;          /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/x-msexcel;          /home/drayer34/bin/mutt/excel2text %s; copiousoutput
+application/ms-Excel;           /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/ms-Excel;           /home/drayer34/bin/mutt/excel2text %s; copiousoutput
+## presentations
+application/vnd.ms-powerpoint;  /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/vnd.ms-powerpoint;  /home/drayer34/bin/mutt/ppt2text %s; copiousoutput
+application/x-mspowerpoint;     /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/x-mspowerpoint;     /home/drayer34/bin/mutt/ppt2text %s; copiousoutput
+application/ppt;                /home/drayer34/bin/mutt/bgrun loffice %s; test=/home/drayer34/bin/mutt/RunningX
+application/ppt;                /home/drayer34/bin/mutt/ppt2text %s; copiousoutput
+# IMAGES
+image/jpeg; /home/drayer34/bin/mutt/bgrun gpicview %s; test=/home/drayer34/bin/mutt/RunningX
+image/png; /home/drayer34/bin/mutt/bgrun gpicview %s; test=/home/drayer34/bin/mutt/RunningX

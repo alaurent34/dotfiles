@@ -1,0 +1,59 @@
+### General ###
+set imap_check_subscribed
+set imap_keepalive = 300
+unset imap_passive
+set mail_check = 60
+set mbox_type = Maildir
+set sleep_time = 0
+
+### Directories and Files ###
+set header_cache     = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+set alias_file       = ~/.mutt/alias
+set mailcap_path     = ~/.mutt/mailcap
+
+### Accounts ###
+
+## Signature ##
+set signature = ~/.mutt/signature
+
+## Account3 ##
+source "~/.mutt/accounts/gmail"
+folder-hook $folder 'source ~/.mutt/accounts/gmail'
+## Account2 ##
+source "~/.mutt/accounts/perso"
+folder-hook $folder 'source ~/.mutt/accounts/perso'
+## Account1
+source "~/.mutt/accounts/uqam"
+folder-hook $folder 'source ~/.mutt/accounts/uqam'
+
+
+### KeyBindings ###
+source "~/.mutt/bindings"
+
+### GPG ###
+source "~/.mutt/gpg.rc"
+
+## appearance
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+
+# for gpg-agent to start
+# Useless
+# set my_msmtp_pass=`gpg -d ~/.msmtp-ovh.gpg` 
+
+### Charset ###
+set charset      = "utf-8"
+# set locale       = `echo "${LC_ALL:-${LC_TIME:-${LANG}}}"`
+set send_charset = "us-ascii:iso-8859-15:utf-8"
+
+### Editing ###
+set editor       = "vim -c 'set filetype=mail' -c 'set fileencodings=' \
+                        -c 'set fileencoding=' -c 'set nohlsearch' \
+                        '+:silent+?^$' "
+set edit_headers = yes
+set autoedit
+
+### Colorscheme ###
+source ~/dotfiles/mutt/colorscheme/mutt-colors-solarized-dark-256.muttrc
