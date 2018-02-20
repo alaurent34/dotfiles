@@ -63,33 +63,34 @@ theme.fs = lain.widget.fs({
     options  = "--exclude-type=tmpfs",
     notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Inconsolata", font_size = 9},
     settings = function()
-        widget:set_markup(markup.font(theme.font, " " .. fs_now.used .. "% "))
+        widget:set_markup(markup.font(theme.font, " " .. fs_now["/"].percentage .. "% "))
     end
 })
 
 
 --{{ Battery Widget }} --
--- TODO: check if displayed info is consistent with multiple batteries
 baticon = wibox.widget.imagebox(beautiful.widget_battery)
 batwidget = lain.widget.bat({
+    ac = "AC",
     batteries = {"BAT0", "BAT1"},
     settings = function()
-        if bat_now.status == "Charging" then
-            baticon:set_image(beautiful.widget_ac)
-        else -- Discharging
-            if bat_now.perc == "N/A" then
-                widget:set_markup(" AC ")
-                baticon:set_image(beautiful.widget_ac)
+        if bat_now.status ~= "N/A" then
+            if bat_now.ac_status == 1 then
+                widget:set_markup(markup.font(theme.font, " AC "))
+                baticon:set_image(theme.widget_ac)
                 return
-            elseif tonumber(bat_now.perc) <= 5 then
-                baticon:set_image(beautiful.widget_battery_empty)
-            elseif tonumber(bat_now.perc) <= 15 then
-                baticon:set_image(beautiful.widget_battery_low)
+            elseif not bat_now.perc and tonumber(bat_now.perc) <= 5 then
+                baticon:set_image(theme.widget_battery_empty)
+            elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
+                baticon:set_image(theme.widget_battery_low)
             else
-                baticon:set_image(beautiful.widget_battery)
+                baticon:set_image(theme.widget_battery)
             end
+            widget:set_markup(markup.font(theme.font, " " .. bat_now.perc .. "% "))
+        else
+            widget:set_markup(markup.font(theme.font, " AC "))
+            baticon:set_image(theme.widget_ac)
         end
-        widget:set_markup(" " .. bat_now.perc .. "% ")
     end
 })
 
