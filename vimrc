@@ -9,6 +9,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mileszs/ack.vim'
+Plug 'godlygeek/tabular' "Must load before vim-markdown (see :h vim-markdown)
 
 Plug 'tpope/vim-abolish'        "correct typo
 Plug 'tpope/vim-surround'       "change surrounding of work \" -> \'
