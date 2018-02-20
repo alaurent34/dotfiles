@@ -1,5 +1,5 @@
 TARGETS    = *.conf
-DEST       = $(HOME)/.config/weechat
+DEST       = $(HOME)/.weechat
 DEST_LINKS = $(addprefix $(DEST)/,$(TARGETS))
 
 .PHONY: all links
