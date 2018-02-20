@@ -76,8 +76,7 @@ set spelllang=fr                   " spellcheck language
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Turn on the WiLd menu
-set wildmenu
+set wildmenu " Turn on the WiLd menu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -87,54 +86,25 @@ else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-"Always show current position
-set ruler
-
-" Height of the command bar
-set cmdheight=2
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
+set ruler                      " Always show current position
+set cmdheight=2                " Height of the command bar
+set hid                        " A buffer becomes hidden when it is abandoned
+set backspace=eol,start,indent " Configure backspace so it acts as it should act
 set whichwrap+=<,>,h,l
-
-" Ignore case when searching
-set ignorecase
-
-" When searching try to be smart about cases 
-set smartcase
-
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch 
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw 
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch 
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" Enable numbers
-set number 
-
-" Enable relative number
-set relativenumber
-
+set ignorecase                 " Ignore case when searching
+set smartcase                  " When searching try to be smart about cases
+set hlsearch                   " Highlight search results
+set incsearch                  " Makes search act like search in modern browsers
+set lazyredraw                 " Don't redraw while executing macros (good performance config)
+set magic                      " For regular expressions turn magic on
+set showmatch                  " Show matching brackets when text indicator is over them
+set mat=2                      " How many tenths of a second to blink when matching brackets
+set number                     " Enable numbers
+set relativenumber             " Enable relative number
 set showcmd
-
-" No annoying sound on errors
-set noerrorbells
+set noerrorbells               " No annoying sound on errors
 set novisualbell
-set t_vb=
+set t_vb=                      " Disable bell sound                                            "
 set tm=500
 
 
@@ -191,23 +161,19 @@ set ffs=unix,dos,mac
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
+set expandtab    " Use spaces instead of tabs
 
-" Be smart when using tabs ;)
-set smarttab
+set smarttab     " Be smart when using tabs ;)
 
-" 1 tab == 4 spaces
-set shiftwidth=4
+set shiftwidth=4 " 1 tab == 4 spaces
 set tabstop=4
 
-" Linebreak on 500 characters
-set lbr
+set lbr          " Linebreak on 500 characters
 set tw=120
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+set ai           " Auto indent
+set si           " Smart indent
+set wrap         " Wrap lines
 
 
 """"""""""""""""""""""""""""""
