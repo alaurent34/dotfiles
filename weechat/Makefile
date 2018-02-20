@@ -1,4 +1,4 @@
-TARGETS    = *.conf
+TARGETS    = $(wildcard *.conf) buddylist.txt ecdsa.pem
 DEST       = $(HOME)/.weechat
 DEST_LINKS = $(addprefix $(DEST)/,$(TARGETS))
 
