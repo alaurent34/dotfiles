@@ -22,8 +22,7 @@ mytextclock = awful.widget.watch(
 theme.cal = lain.widget.calendar({
     attach_to = { mytextclock },
     notification_preset = {
-        font = "Inconsolata",
-        font_size = 11,
+        font = "Inconsolata 11",
         fg   = theme.fg_normal,
         bg   = theme.bg_normal
     }
