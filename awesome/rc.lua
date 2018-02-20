@@ -261,7 +261,6 @@ awful.screen.connect_for_each_screen(function(s)
             batwidget,
             arrl_ld,
             arrl_dl,
-            clockicon,
             mytextclock,
             arrl_ld,
             s.mylayoutbox,
