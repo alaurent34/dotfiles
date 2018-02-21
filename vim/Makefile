@@ -1,4 +1,4 @@
-TARGETS    = plug-config spell
+TARGETS    = plug-config spell mappings.vim functions.vim
 DEST_DIR   = $(HOME)/.vim
 DEST_LINKS = $(addprefix $(DEST_DIR)/,$(TARGETS))
 VIMPLUG_DEST_LINK = $(DEST_DIR)/autoload/plug.vim
