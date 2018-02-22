@@ -1,5 +1,4 @@
 local awful         = require("awful")
--- local screen        = require("screen") INUTILE
 local naughty       = require("naughty")
 local menubar       = require("menubar")
 local revelation  = require("revelation")
@@ -110,7 +109,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "t", function () awful.spawn(terminal_cmd .. 'htop') end),
     awful.key({ modkey,         }, "a", function () awful.spawn(terminal_cmd .. 'ranger') end),
     awful.key({ modkey,         }, "i", start_mail),
-    awful.key({ modkey, "Control" }, "i", set_one_window_sidemenu_style),
+    awful.key({ modkey, "Control" }, "i", function()
+        local t = awful.screen.focused().selected_tag
+        sidemenu:set_sidemenu_style(
+             t.index == 2
+             and sidemenu.browser_news_style
+             or  (t.index == 3 and sidemenu.mail_calendar_style or {})
+        )
+    end),
     awful.key({ modkey, "Shift" }, "i", start_mail_calendar),
     awful.key({ modkey,         }, "e", function () awful.spawn(editor_cmd) end),
     awful.key({ modkey,         }, "d", function () awful.spawn(terminal_cmd .. mpdclient) end),

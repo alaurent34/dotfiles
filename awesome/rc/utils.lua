@@ -90,11 +90,31 @@ function start_mail()
     gears.timer.start_new(2, awful.spawn("pkill -SIGUSR1 offlineimap"))
 end
 
-function set_one_window_sidemenu_style()
+-- {{ sidemenu
+
+sidemenu = {
+    default_style = {
+        master_width_factor = 0.3,
+        master_count        = 1,
+        layout              = awful.layout.suit.tile.right
+    },
+    mail_calendar_style = {
+        master_width_factor = 0.3,
+        master_count = 1,
+        layout = awful.layout.suit.tile.left
+    },
+    browser_news_style = {
+        master_width_factor = 0.2,
+        master_count = 1,
+        layout = awful.layout.suit.tile.right
+    }
+}
+
+function sidemenu:set_sidemenu_style(args)
     local t = awful.screen.focused().selected_tag
-    t.master_count = 1
-    t.master_width_factor = 0.3
-    awful.layout.set(awful.layout.suit.tile.left)
+    t.master_width_factor = args and args.master_width_factor or sidemenu.default_style.master_width_factor
+    t.master_count        = args and args.master_count        or sidemenu.default_style.master_count
+    awful.layout.set(args and args.layout or sidemenu.default_style.layout)
 end
 
 function start_mail_calendar ()
@@ -103,11 +123,11 @@ function start_mail_calendar ()
         start_mail()
         -- starting calendar
         awful.spawn(browser .. " " .. "--target window" .. " " .. "https://calendar.google.com/")
-        gears.timer.start_new(0.3, function ()
-            awful.spawn(browser .. " " .. "--target tab" .. " "
-                        ..  "https://mail.savoirfairelinux.com/zimbra/?app=Calendar&view=month#1"
-                        .. " " .. "https://www.moodle2.uqam.ca/coursv3/my/")
-        end)
+        -- gears.timer.start_new(0.3, function ()
+        --     awful.spawn(browser .. " " .. "--target tab" .. " "
+        --                 ..  "https://mail.savoirfairelinux.com/zimbra/?app=Calendar&view=month#1"
+        --                 .. " " .. "https://www.moodle2.uqam.ca/coursv3/my/")
+        -- end)
     end)
     set_one_window_sidemenu_style()
 end
