@@ -10,15 +10,14 @@ fun! s:RemoveFalseSpaces()
 endf
 au! BufWritePre * call s:RemoveFalseSpaces()
 
-" TODO:trouver g:syntaxed_fts
 " get rid of trailing white spaces
-" fun! s:StripTrailingWhiteSpaces()
-"   let l:pos = getpos('.')
-"   exec ":%s/\\s\\+$//e"
-"   call setpos('.', l:pos)
-" endf
-" command! StripTrailingWhiteSpaces call s:StripTrailingWhiteSpaces()
-" exec "au FileType ".join(g:syntaxed_fts, ',')." au BufWritePre * call s:StripTrailingWhiteSpaces()"
+fun! s:StripTrailingWhiteSpaces()
+  let l:pos = getpos('.')
+  exec ":%s/\\s\\+$//e"
+  call setpos('.', l:pos)
+endf
+command! StripTrailingWhiteSpaces call s:StripTrailingWhiteSpaces()
+exec "au FileType ".join(g:syntaxed_fts, ',')." au BufWritePre * call s:StripTrailingWhiteSpaces()"
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
