@@ -32,6 +32,30 @@ call plug#end()
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+let g:programming_fts = [
+      \ "c",
+      \ "cpp",
+      \ "python",
+      \ "pyrex",
+      \ "haskell",
+      \ "lua",
+      \ "php",
+      \ "js",
+      \ "html",
+      \ "css",
+      \ "cs",
+      \ "java",
+      \ "sh"
+      \ ]
+let g:syntaxed_fts = g:programming_fts + [
+      \ "vim",
+      \ "tex",
+      \ "mkd",
+      \ "markdown",
+      \ "rst",
+      \ "cmake",
+      \ "make"
+      \ ]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -174,18 +198,16 @@ au BufRead,BufRead *.mustache set filetype=html
 
 au BufRead,BufNewFile,FileType gitcommit,mail,*.yaml,*.yml,*.md set tw=80
 
-" TODO:faire marcher
 " code
-" exec "au BufRead,BufNewFile,FileType ".join(g:programming_fts, ',')." ".
-"             \ "set tw=120|"
-"             \ "set ts=4|"
-"             \ "set sw=4"
+exec "au BufRead,BufNewFile,FileType ".join(g:programming_fts, ',')." ".
+            \ "set tw=120|"
+            \ "set ts=4|"
+            \ "set sw=4"
 " others
 au BufRead,BufNewFile ~/.mutt/* set filetype=muttrc
 
-" TODO : faire marcher
 " syntaxed filetypes
-" exec "au BufRead,BufNewFile,Filetype ".join(g:syntaxed_fts, ',')." set si"
+exec "au BufRead,BufNewFile,Filetype ".join(g:syntaxed_fts, ',')." set si"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Personal config
