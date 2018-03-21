@@ -50,9 +50,36 @@ c.fonts.tabs = font_size+" monospace"
 ##################
 
 # general
+config.bind('"', 'enter-mode set_mark')
+config.bind('0', 'scroll-to-perc -x 0')
+config.bind('tg', 'set-cmd-text -s :tab-give')
+config.bind('tt', 'set-cmd-text -s :tab-take')
+config.unbind('<ctrl-q>', mode='normal')
 ## passthrough allow ctrl-v for pasting clipboard
 config.unbind('<ctrl-v>', mode='passthrough')
-config.bind('<ctrl-z>','leave-mode', mode='passthrough')
+config.bind('<ctrl-d>','leave-mode', mode='passthrough')
+config.bind(';iy', 'hint images yank')
+# sessions
+config.bind('sw',  'set-cmd-text -s :session-save --only-active-window')
+config.bind('ss',  'session-save default')
+# downloads
+config.bind('ed',  'download-open')
+# videos (mpv, castnow, youtube-dl)
+config.bind('xv',  'spawn --userscript ~/bin/qutebrowser_bin/view_in_mpv')
+config.bind(';xv', 'hint links spawn mpv --force-window --no-terminal --keep-open=yes --ytdl {hint-url}')
+config.bind('xc',  'spawn --userscript ~/bin/qutebrowser_bin/cast {url}')
+config.bind(';xc', 'hint links spawn --userscript ~/bin/qutebrowser_bin/cast {hint-url}')
+## unbinding for preventing shadowing ;Yd and ;Ym
+config.unbind(';Y')
+config.bind('Yd',  'spawn youtube-dl {url}')
+config.bind(';Yd', 'hint links spawn youtube-dl {hint-url}')
+config.bind('Ym',  'spawn youtube-dl --extract-audio --audio-format mp3 {url}')
+config.bind(';Ym', 'hint links spawn youtube-dl --extract-audio --audio-format mp3 {hint-url}')
+# start/stop totally private browsing
+# config.bind('gp',  'spawn --userscript ~/bin/qutebrowser_bin/totally private')
+# config.bind('gP',  'spawn --userscript ~/bin/qutebrowser_bin/totally public')
+# password fill
+config.bind(';p',  'spawn --userscript /home/drayer34/bin/qutebroser_bin/password_fill')
 
 #netflix
 c.qt.args = ['ppapi-widevine-path=/usr/lib/qt/plugins/ppapi/libwidevinecdmadapter.so']
