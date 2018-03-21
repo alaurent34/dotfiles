@@ -129,7 +129,7 @@ function start_mail_calendar ()
         --                 .. " " .. "https://www.moodle2.uqam.ca/coursv3/my/")
         -- end)
     end)
-    set_one_window_sidemenu_style()
+    sidemenu:set_sidemenu_style(sidemenu.mail_calendar_style)
 end
 
 -- TODO: trouver comment utiliser `pass` pour les passwords...
