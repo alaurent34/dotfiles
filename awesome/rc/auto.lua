@@ -11,7 +11,19 @@ run_once("xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &")
 run_once(redshift.." & disown")
 run_once("keynav")
 
--- if screen:count() == 1 then
---     run_once("xrandr --output eDP1 --off ; xrandr --output eDP1 --auto")
--- end
+-- Conky: if started kill and start again, otherwise start.
+if not pgrep("conky") then
+    if screen:count() <= 1 then
+        awful.spawn.easy_async("bash -c 'sleep 5 ; conky -c ~/.conkyrc-infos.lua -a top_right -x 30 -y 45 -d ; conky -c ~/.conkyrc-date.lua'", async_dummy_cb)
+    else
+        awful.spawn.easy_async("bash -c 'sleep 5 ; conky -c ~/.conkyrc-infos.lua -a top_right -x -1900 -y 45 -d ; conky -c ~/.conkyrc-date.lua'", async_dummy_cb)
+    end
+else
+    pkill("conky")
+    if screen:count() <= 1 then
+        awful.spawn.easy_async("bash -c 'conky -c ~/.conkyrc-infos.lua -a top_right -x 30 -y 45 -d ; conky -c ~/.conkyrc-date.lua'", async_dummy_cb)
+    else
+        awful.spawn.easy_async("bash -c 'conky -c ~/.conkyrc-infos.lua -a top_right -x -1900 -y 45 -d ; conky -c ~/.conkyrc-date.lua'", async_dummy_cb)
+    end
+end
 -- }}}
