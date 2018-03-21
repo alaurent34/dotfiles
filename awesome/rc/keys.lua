@@ -40,7 +40,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "ç", function () awful.spawn("light -A 15") end),
     awful.key({	          }, "XF86MonBrightnessDown", function () awful.spawn("light -U 15") end),
     awful.key({ modkey, "Shift" }, "0xfe52", function () awful.spawn("light -U 15") end),
-    awful.key({	          }, "F9", function ()
+    awful.key({	modkey }, "F9", function ()
         if not pgrep(redshift) then
             awful.spawn(redshift)
         else
