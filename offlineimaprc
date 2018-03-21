@@ -17,21 +17,22 @@ footer = "\n"
 localrepository = local_uqam
 remoterepository = remote_uqam
 autorefresh = 0.5
-quick = 10
+# quick = 10
 maxage = 365
 
 [Account Gmail]
 localrepository = local_gmail
 remoterepository = remote_gmail
 autorefresh = 0.5
-quick =10
+# quick = 10
 maxage = 365
 
 [Account Perso]
 localrepository = local_perso
 remoterepository = remote_perso
 autorefresh = 0.5
-quick = 10
+# quick = 10
+maxage = 365
 
 [Repository local_uqam]
 type = Maildir
@@ -50,7 +51,7 @@ type = IMAP
 remotehost = outlook.office365.com 
 remoteuser = ek391097@ens.uqam.ca
 remotepasseval = get_pass("uqam")
-folderfilter = lambda foldername: foldername in ['INBOX', 'Sent', 'Sent Item', 'Junk']
+folderfilter = lambda foldername: foldername in ['INBOX', 'Sent Item', 'Junk']
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 keepalive = 60
 holdconnectionopen = yes
@@ -68,10 +69,10 @@ holdconnectionopen = yes
 
 [Repository remote_gmail]
 auth_mechanisms = XOAUTH2
-oauth2_client_id = 709960739156-focg71r4r523trt5jo9pnuhg7rg2vqol.apps.googleusercontent.com
-oauth2_client_secret = _U2Ztv1py1bO_au88EB676gb
+oauth2_client_id = 709960739156-5d6fnc3rjpm77qvj150n03sdbrs92ot0.apps.googleusercontent.com 
+oauth2_client_secret = fu1lZAu6JXY53Fhfl7FNM__n 
 oauth2_request_url = https://accounts.google.com/o/oauth2/token
-oauth2_refresh_token = 1/QlrT_-RpoWO8ZSuKippCBgsfJuCQ9wsBbPgppPN-DXs
+oauth2_refresh_token = 1/7CSvBUJQjnnGrxULqVkWmEifo3u7A5gmi4j1zidiZgI 
 type=Gmail
 remoteuser = ant.laurent34@gmail.com
 remotepasseval = get_pass("gmail")
