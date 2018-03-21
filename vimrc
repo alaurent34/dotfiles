@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-scripts/wombat256.vim' 
+Plug 'vim-scripts/wombat256.vim'
 Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --omnisharp-completer' }
 Plug 'tpope/vim-fugitive'
@@ -64,7 +64,7 @@ let g:syntaxed_fts = g:programming_fts + [
 filetype plugin on
 filetype indent on
 
-" :W sudo saves the file 
+" :W sudo saves the file
 command! W w !sudo tee % > /dev/null
 
 " Return to last edit position when opening files (You want this!)
@@ -108,7 +108,7 @@ set number                     " Enable numbers
 set relativenumber             " Enable relative number
 set showcmd
 set noerrorbells               " No annoying sound on errors
-set novisualbell
+set visualbell
 set t_vb=                      " Disable bell sound                                            "
 set tm=500
 set laststatus=2               " Always show the status line
@@ -127,7 +127,7 @@ set si           " Smart indent
 set wrap         " Wrap lines
 " set foldcolumn=1 " Add a bit extra margin to the left
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -146,7 +146,7 @@ endtry
 " => Colorsheme and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
