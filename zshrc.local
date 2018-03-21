@@ -20,6 +20,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export AURDEST=~/aur/other
 export BROWSER=qutebrowser
+export PDFVIEWER=okular
 
 stty -ixon
 
