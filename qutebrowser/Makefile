@@ -1,4 +1,4 @@
-TARGETS    = config.py bookmarks quickmarks
+TARGETS    = config.py
 DEST       = $(HOME)/.config/qutebrowser/
 DEST_LINKS = $(addprefix $(DEST)/,$(TARGETS))
 
