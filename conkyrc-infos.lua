@@ -113,9 +113,9 @@ ${offset 190}${font Ubuntu:size=10:style=bold}${alignr}$color3${execi 600 wget -
 ${voffset -60}
 ${offset 90}${font Ubuntu:size=11:style=bold}${color5}ETHERNET
 ${voffset 40}
-${offset 15}${color1}${font ubuntu:size=10:style=bold}Up: ${alignr}${font Ubuntu:size=10:style=normal}$color2${upspeed wlan0} / ${totalup wlan0}
+${offset 15}${color1}${font ubuntu:size=10:style=bold}Up: ${alignr}${font Ubuntu:size=10:style=normal}$color2${upspeed enp0s31f6} / ${totalup enp0s31f6}
 ${offset 15}${upspeedgraph enp0s31f6 40,320 4B1B0C FF5C2B 1280KiB -l}
-${offset 15}${color1}${font Ubuntu:size=10:style=bold}Down: ${alignr}${font Ubuntu:size=10:style=normal}$color2${downspeed wlan0} / ${totaldown wlan0}
+${offset 15}${color1}${font Ubuntu:size=10:style=bold}Down: ${alignr}${font Ubuntu:size=10:style=normal}$color2${downspeed enp0s31f6} / ${totaldown enp0s31f6}
 ${offset 15}${downspeedgraph enp0s31f6 40,320 324D23 77B753 1280KiB -l}
 
 ${color4}${hr 2}
