@@ -1,29 +1,31 @@
 ## IMAP: offlineimap
 set mbox_type = Maildir
-set folder = "~/mail/uqam"
-source ~/.mutt/mailboxes
-set spoolfile = "+/INBOX"
-set record = "+/Sent"
-set postponed = "+/Drafts"
-set mbox="+mbox"
+set folder    = "~/mail/"
+set spoolfile = "+UQAM/INBOX"
+set record    = "+UQAM/INBOXINBOX"
+set postponed = "+UQAM/Drafts"
+set trash     = "+UQAM/Trash"
+set mbox      = "+UQAM/mbox"
 
 ## Send options.
-set realname='Antoine Laurent'
+set realname = 'Antoine Laurent'
 
-set sendmail='/usr/bin/msmtp -a uqam'
-set from=laurent.antoine@courrier.uqam.ca
+set sendmail = '/usr/bin/msmtp -a uqam'
+set from     = laurent.antoine@courrier.uqam.ca
 
 ## Hook -- IMPORTANT!
 account-hook $folder "source ~/.mutt/mailboxes"
 
 ## Keybinding ##
 macro index gi \
-    "<change-folder>=INBOX<enter>" "Go to inbox"
+    "<change-folder>=UQAM/INBOX<enter>" "Go to inbox"
 macro index gt \
-    "<change-folder>=Sent<enter>" "Go to sent Mail"
+    "<change-folder>=UQAM/Sent<enter>" "Go to sent Mail"
 macro index gd \
-    "<change-folder>=Drafts<enter>" "Go to drafts"
+    "<change-folder>=UQAM/Drafts<enter>" "Go to drafts"
 macro index gs \
-    "<change-folder>=Junk<enter>" "Go to Spam"
+    "<change-folder>=UQAM/Junk<enter>" "Go to Spam"
+macro index gc \
+    "<change-folder>=UQAM/Trash<enter>" "Go to Trash"
 
 # vim: ft=muttrc
