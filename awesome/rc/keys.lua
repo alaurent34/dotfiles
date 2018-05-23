@@ -160,16 +160,17 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift" }, "u",
         function ()
-            local tags = awful.tag.gettags(client.focus.screen)
-            local t_tags = awful.tag.gettags(1)
+            local s = awful.screen.focused()
+            local t_screen = screen[(s.index-2) % screen:count()+1]
 
-            for i,tag in pairs(tags) do
+            for i,tag in pairs(s.tags) do
                 for _,c in pairs(tag:clients()) do
-                    awful.client.movetoscreen(c, 1)
-                    awful.client.movetotag(t_tags[i], c)
+                    c:move_to_screen(t_screen)
+                    c:move_to_tag(t_screen.tags[i])
                 end
             end
         end),
+
     awful.key({ "Mod1", "Control"   }, "o",
         function ()
             local s = awful.screen.focused()
