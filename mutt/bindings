@@ -33,7 +33,7 @@ bind pager /  search
 bind pager k  previous-line
 bind pager gg top
 bind pager G  bottom
-bind index,pager a  group-reply
+bind index,pager \Cr  group-reply
 bind index,pager         N         search-opposite
 
 bind generic,index,pager \Cf       next-page
@@ -62,11 +62,11 @@ bind  index          B   bounce-message
 # Switching mailbox
 macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 macro index g1 \
-    "<change-folder>~/mail/uqam/INBOX<enter>" "Go to inbox UQAM"
+    "<change-folder>~/mail/UQAM/INBOX<enter>" "Go to inbox UQAM"
 macro index g2 \
-    "<change-folder>~/mail/perso/INBOX<enter>" "Go to inbox Perso"
+    "<change-folder>~/mail/Perso/INBOX<enter>" "Go to inbox Perso"
 macro index g3 \
-    "<change-folder>~/mail/gmail/INBOX<enter>" "Go to inbox Gmail"
+    "<change-folder>~/mail/Gmail/INBOX<enter>" "Go to inbox Gmail"
 
 macro index,pager    ,d  "<delete-message><sync-mailbox><enter>"                        "direct delete"
 macro index,pager    ,t "<delete-thread><sync-mailbox>"                                 "move thread to trash"
