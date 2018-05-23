@@ -1,10 +1,11 @@
 ### General ###
+set beep           = no
 set imap_check_subscribed
 set imap_keepalive = 300
 unset imap_passive
-set mail_check = 60
-set mbox_type = Maildir
-set sleep_time = 0
+set mail_check     = 60
+set mbox_type      = Maildir
+set sleep_time     = 0
 
 ### Directories and Files ###
 set header_cache     = ~/.mutt/cache/headers
@@ -36,7 +37,7 @@ source "~/.mutt/bindings"
 source "~/.mutt/gpg.rc"
 
 ## appearance
-set sort = 'threads'
+set sort     = 'threads'
 set sort_aux = 'reverse-last-date-received'
 
 # for gpg-agent to start
