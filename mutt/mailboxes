@@ -1,1 +1,1 @@
-mailboxes "+Gmail/INBOX" "+Gmail/INBOX.Drafts" "+Gmail/INBOX.Flagged" "+Gmail/INBOX.Important" "+Gmail/INBOX.Junk" "+Gmail/INBOX.Sent" "+Gmail/INBOX.Trash" "+Gmail/Notes" "+Perso/INBOX" "+Perso/INBOX.Drafts" "+Perso/INBOX.Junk" "+Perso/INBOX.Sent" "+Perso/INBOX.Trash" "+UQAM/INBOX" "+UQAM/Junk"
+mailboxes "+Gmail/INBOX" "+Gmail/INBOX.Drafts" "+Gmail/INBOX.Junk" "+Gmail/INBOX.Sent" "+Gmail/INBOX.Trash" "+Perso/INBOX" "+Perso/INBOX.Drafts" "+Perso/INBOX.Junk" "+Perso/INBOX.Sent" "+Perso/INBOX.Trash" "+UQAM/INBOX" "+UQAM/Drafts" "+UQAM/Junk" "+UQAM/Sent" "+UQAM/Trash"
