@@ -18,21 +18,21 @@ localrepository = local_uqam
 remoterepository = remote_uqam
 autorefresh = 0.5
 # quick = 10
-maxage = 365
+maxage = 120
 
 [Account Gmail]
 localrepository = local_gmail
 remoterepository = remote_gmail
 autorefresh = 0.5
 # quick = 10
-maxage = 365
+maxage = 120
 
 [Account Perso]
 localrepository = local_perso
 remoterepository = remote_perso
 autorefresh = 0.5
 # quick = 10
-maxage = 365
+maxage = 120
 
 [Repository local_uqam]
 type = Maildir
