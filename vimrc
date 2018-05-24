@@ -26,6 +26,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
 
+Plug 'vim-scripts/gnuplot.vim'
+
 call plug#end()
 
 " With a map leader it's possible to do extra key combinations
@@ -200,7 +202,7 @@ au BufRead,BufNewFile,FileType gitcommit,mail,*.yaml,*.yml,*.md set tw=80
 
 " code
 exec "au BufRead,BufNewFile,FileType ".join(g:programming_fts, ',')." ".
-            \ "set tw=120|"
+            \ "set tw=100|"
             \ "set ts=4|"
             \ "set sw=4"
 " others
