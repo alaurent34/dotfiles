@@ -36,15 +36,15 @@ maxage = 120
 
 [Repository local_uqam]
 type = Maildir
-localfolders = ~/mail/uqam
+localfolders = ~/mail/UQAM
 
 [Repository local_perso]
 type = Maildir
-localfolders = ~/mail/perso
+localfolders = ~/mail/Perso
 
 [Repository local_gmail]
 type = GmailMaildir
-localfolders = ~/mail/gmail
+localfolders = ~/mail/Gmail
 
 [Repository remote_uqam]
 type = IMAP
