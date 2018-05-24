@@ -1,2 +1,3 @@
 freenode.sim590
+freenodeZ.Pantoufle
 freenodeZ.sim590
