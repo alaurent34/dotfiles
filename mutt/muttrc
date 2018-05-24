@@ -36,6 +36,9 @@ source "~/.mutt/bindings"
 ### GPG ###
 source "~/.mutt/gpg.rc"
 
+### Mailboxes ###
+source "~/.mutt/mailboxes"
+
 ## appearance
 set sort     = 'threads'
 set sort_aux = 'reverse-last-date-received'
