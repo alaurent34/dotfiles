@@ -1,9 +1,6 @@
 [submodule "vim/vim-plug"]
 	path = vim/vim-plug
 	url = https://github.com/junegunn/vim-plug.git
-[submodule "awesome/lain"]
-	path = awesome/lain
-	url = https://github.com/lcpz/lain.git
 [submodule "awesome/awesome-copycats"]
 	path = awesome/awesome-copycats
 	url = https://github.com/lcpz/awesome-copycats.git
@@ -14,8 +11,17 @@
 	path = awesome/revelation
 	url = https://github.com/guotsuan/awesome-revelation.git
 [submodule "awesome/themes"]
-	path = awesome/themes
+	path = awesome/themes_old
 	url = https://github.com/sim590/awesome-themes.git
 [submodule "awesome/awesome-revelation"]
 	path = awesome/awesome-revelation
 	url = https://github.com/guotsuan/awesome-revelation
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = https://github.com/lcpz/lain.git
+[submodule "awesome/awesome-freedesktop"]
+	path = awesome/awesome-freedesktop
+	url = https://github.com/lcpz/awesome-freedesktop.git
+[submodule "awesome/freedesktop"]
+	path = awesome/freedesktop
+	url = https://github.com/lcpz/awesome-freedesktop.git
