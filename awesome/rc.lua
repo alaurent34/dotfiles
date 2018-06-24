@@ -1,17 +1,31 @@
--- Standard awesome library
-local gears = require("gears")
-local awful = require("awful")
-awful.rules = require("awful.rules")
-require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
-local menubar = require("menubar")
+-- {{{ Required libraries
+local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
+local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
+-- Standard awesome library
+local gears         = require("gears")
+local awful         = require("awful")
+                      require("awful.autofocus")
+awful.rules = require("awful.rules")
+-- Widget and layout library
+local wibox         = require("wibox")
+-- Theme handling library
+local beautiful     = require("beautiful")
+-- Notification library
+local naughty       = require("naughty")
+-- local menubar       = require("menubar")
+local lain          = require("lain")
+local freedesktop   = require("freedesktop")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
+local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local revelation  = require("revelation")
+-- User Library
+local utils = require("rc.utils") -- variables, utility functions...
+-- require("rc.synergy") -- starts synergy on multiple computers using ssh
+-- require("rc.widgets") -- menu widgets
+require("rc.keys")    -- key bindings
+require("rc.auto")    -- autostart applications
+-- }}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -38,29 +52,25 @@ do
 end
 -- }}}
 
---Keyboard CA MULTI
-awful.spawn.with_shell("setxkbmap -variant multix ca")
---------------------------------
---  MY CUSTOM CONFIG MODULES  --
---------------------------------
-
--- {{{
-require("rc.utils") -- variables, utility functions...
-
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
--- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-beautiful.init(themes_dir .. "/" .. my_theme .. "/" .. "theme.lua") -- theme
-revelation.init()
 
--- require("rc.synergy") -- starts synergy on multiple computers using ssh
-require("rc.keys")    -- key bindings
-require("rc.widgets") -- menu widgets
-require("rc.auto")    -- autostart applications
--- }}}
+local themes = {
+    "blackburn",       -- 1
+    "copland",         -- 2
+    "dremora",         -- 3
+    "holo",            -- 4
+    "multicolor",      -- 5
+    "powerarrow",      -- 6
+    "powerarrow-dark", -- 7
+    "rainbow",         -- 8
+    "steamburn",       -- 9
+    "vertex",          -- 10
+}
 
+local chosen_theme = themes[7]
 
--- Table of layouts to cover with awful.layout.inc, order matters.
+awful.util.terminal = utils.terminal
+awful.util.tagnames = { "α", "🌎", "✉", "π", "ε", "ζ", "Ϡ", "♫", "☏" }
 awful.layout.layouts = {
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
@@ -79,53 +89,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
 }
--- }}}
-
--- {{{ Helper functions
-local function client_menu_toggle_fn()
-    local instance = nil
-
-    return function ()
-        if instance and instance.wibox.visible then
-            instance:hide()
-            instance = nil
-        else
-            instance = awful.menu.clients({ theme = { width = 250 } })
-        end
-    end
-end
--- }}}
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal_cmd .. "man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
--- {{{ Wibar
--- Create a textclock widget
--- mytextclock = wibox.widget.textclock()
-
-local taglist_buttons = awful.util.table.join(
+awful.util.taglist_buttons = my_table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then
@@ -141,8 +105,7 @@ local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
-
-local tasklist_buttons = awful.util.table.join(
+awful.util.tasklist_buttons = my_table.join(
                      awful.button({ }, 1, function (c)
                                               if c == client.focus then
                                                   c.minimized = true
@@ -159,7 +122,18 @@ local tasklist_buttons = awful.util.table.join(
                                                   c:raise()
                                               end
                                           end),
-                     awful.button({ }, 3, client_menu_toggle_fn()),
+                     awful.button({ }, 3, function()
+                         local instance = nil
+
+                         return function ()
+                             if instance and instance.wibox.visible then
+                                 instance:hide()
+                                 instance = nil
+                             else
+                                 instance = awful.menu.clients({ theme = { width = 250 } })
+                             end
+                        end
+                     end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
                                           end),
@@ -167,6 +141,46 @@ local tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
+-- lain.layout.termfair.nmaster           = 3
+-- lain.layout.termfair.ncol              = 1
+-- lain.layout.termfair.center.nmaster    = 3
+-- lain.layout.termfair.center.ncol       = 1
+-- lain.layout.cascade.tile.offset_x      = 2
+-- lain.layout.cascade.tile.offset_y      = 32
+-- lain.layout.cascade.tile.extra_padding = 5
+-- lain.layout.cascade.tile.nmaster       = 5
+-- lain.layout.cascade.tile.ncol          = 2
+
+local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+beautiful.init(theme_path)
+-- }}}
+
+-- {{{ Menu
+local myawesomemenu = {
+    { "hotkeys", function() return false, hotkeys_popup.show_help end },
+    { "manual", utils.terminal .. " -e man awesome" },
+    { "edit config", string.format("%s -e %s %s", utils.terminal, editor, awesome.conffile) },
+    { "restart", awesome.restart },
+    { "quit", function() awesome.quit() end }
+}
+awful.util.mymainmenu = freedesktop.menu.build({
+    icon_size = beautiful.menu_height or 16,
+    before = {
+        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        -- other triads can be put here
+    },
+    after = {
+        { "Open terminal", utils.terminal },
+        -- other triads can be put here
+    }
+})
+-- menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
+
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
+-- }}}
+
+-- {{{ Screen
 local function set_wallpaper(s)
     awful.spawn.with_shell("~/.fehbg")
     -- Wallpaper
@@ -180,105 +194,26 @@ local function set_wallpaper(s)
     -- end
 end
 
--- {{ Powerarrow-dark icons }} --
-spr = wibox.widget.textbox(' ')
-arrl = wibox.widget.imagebox()
-arrl:set_image(beautiful.arrl)
-arrl_dl = wibox.widget.imagebox()
-arrl_dl:set_image(beautiful.arrl_dl)
-arrl_ld = wibox.widget.imagebox()
-arrl_ld:set_image(beautiful.arrl_ld)
--- tempicon = wibox.widget.imagebox()
--- tempicon:set_image(beautiful.temp)
-
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
     set_wallpaper(s)
-
-    -- Each screen has its own tag table.
-    awful.tag({ "α", "🌎", "✉", "π", "ε", "ζ", "Ϡ", "♫", "☏" }, s, awful.layout.layouts[1])
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
-
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ height = 20, position = "top", screen = s })
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-            arrl_ld,
-            arrl_dl,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            arrl_ld,
-            mpdicon,
-            mpdwidgetbg,
-            arrl_dl,
-            volicon,
-            volumewidget,
-            arrl_ld,
-            arrl_dl,
-            tempicon,
-            tempwidget,
-            arrl_ld,
-            arrl_dl,
-            cpuicon,
-            cpuwidget,
-            arrl_ld,
-            arrl_dl,
-            -- memicon,
-            -- memwidget,
-            -- fsicon,
-            -- theme.fs.widget,
-            -- arrl_ld,
-            -- arrl_dl,
-            baticon,
-            batwidget,
-            arrl_ld,
-            arrl_dl,
-            mytextclock,
-            arrl_ld,
-            s.mylayoutbox,
-        },
-    }
+    beautiful.at_screen_connect(s)
 end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+root.buttons(my_table.join(
+    awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
 
-clientbuttons = awful.util.table.join(
+clientbuttons = my_table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
@@ -339,8 +274,15 @@ end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
+    -- Custom
+    if beautiful.titlebar_fun then
+        beautiful.titlebar_fun(c)
+        return
+    end
+
+    -- Default
     -- buttons for the titlebar
-    local buttons = awful.util.table.join(
+    local buttons = my_table.join(
         awful.button({ }, 1, function()
             client.focus = c
             c:raise()
@@ -353,7 +295,7 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    awful.titlebar(c, {size = 16}) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
