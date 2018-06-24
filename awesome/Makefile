@@ -1,4 +1,4 @@
-TARGETS    = rc rc.lua themes lain revelation penlight awesome-copycats
+TARGETS    = rc rc.lua themes lain revelation penlight awesome-copycats freedesktop
 DEST       = $(HOME)/.config/awesome/
 DEST_LINKS = $(addprefix $(DEST)/,$(TARGETS))
 
