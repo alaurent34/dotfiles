@@ -1,8 +1,9 @@
 # TEXT
 text/plain; vim %s ;
 # HTML
-text/html; qutebrowser  %s &; test=/home/drayer34/bin/mutt/RunningX; needsterminal;
+# text/html; qutebrowser  %s &; test=/home/drayer34/bin/mutt/RunningX; needsterminal;
 text/html; elinks -dump ; copiousoutput;
+# text/html; w3m -dump -I %{charset} -T text/html; copiousoutput;
 application/pgp-encrypted; gpg --decrypt ; copiousoutput;
 
 # PDF
