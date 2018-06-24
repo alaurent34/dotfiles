@@ -1,35 +1,36 @@
+local naughty = require("naughty")
 local awful = require("awful")
 local gears = require("gears")
+require("pl.stringx").import()
 
 awful.util.shell = "/bin/zsh"
 
 -- {{{ Variable definitions
 -- Setup directories
-home_dir   = os.getenv("HOME")
-config_dir = (home_dir .."/.config/awesome/")
-themes_dir = (config_dir .. "/" .. "themes")
-my_theme   = "powerarrow-darker"--"multicolor" -- "powerarrow-darker"
+local home_dir   = os.getenv("HOME")
+local config_dir = (home_dir .."/.config/awesome/")
+-- local themes_dir = (config_dir .. "/" .. "themes")
+-- local my_theme   = "powerarrow-darker"
 
 -- This is used later as the default terminal and editor to run.
-terminal     = "urxvt"
-terminal_cmd = terminal .. " -e "
-editor       = os.getenv("EDITOR") or "vim"
-editor_cmd   = terminal_cmd .. editor
--- TODO: use pass for safely getting password
-mpd_remote   = "env MPD_HOST=q1w2e3r4@/home/simon/.mpd/socket mpc"
+local terminal     = "urxvt"
+local terminal_cmd = terminal .. " -e "
+local editor       = os.getenv("EDITOR") or "vim"
+local editor_cmd   = terminal_cmd .. editor
+local mpd_remote   = "env MPD_HOST=/home/drayer34/.config/mpd/socket mpc"
 
 -- applications
-browser      = "qutebrowser --backend webengine"
-scnd_browser = "firefox"
-mail         = "mutt"
-mpdclient    = "ncmpcpp"
-image_viewer = "gpicview"
-pamixer      = "pamixer"
-vmixer        = home_dir .. "/bin/pulsemixer"
-redshift     = "redshift -l geoclue2 -t 6500:3500 -m randr -v" -- "redshift -l manual -l 45.55:-73.72 -t 6300:3500"
+local browser      = "qutebrowser --backend webengine"
+local scnd_browser = "firefox"
+local mail         = "mutt"
+local mpdclient    = "ncmpcpp"
+local image_viewer = "gpicview"
+local pamixer      = "pamixer"
+local vmixer       = "pulsemixer"
+local redshift     = "redshift -l geoclue2 -t 6500:3500 -m randr -v"
 
-icon_exec = home_dir .. "/bin/x-icon"
-icon_dir  = home_dir .. "/.local/share/applications/"
+local icon_exec = home_dir .. "/bin/x-icon"
+local icon_dir  = home_dir .. "/.local/share/applications/"
 
 
 -- Default modkey.
@@ -39,12 +40,22 @@ icon_dir  = home_dir .. "/.local/share/applications/"
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
-function async_dummy_cb(stdout, stderr, exitreason, exitcode) end
+-- returns the powerset of a given set
+local function powerset(s)
+    if not s then return {} end
+    local t = {{}}
+    for i = 1, #s do
+        for j = 1, #t do
+            t[#t+1] = {s[i],unpack(t[j])}
+        end
+    end
+    return t
+end
+
+local function async_dummy_cb(stdout, stderr, exitreason, exitcode) end
 
 -- Safely returns return value from os.execute(...)
-function os_exec_rv(os_execute_ret)
-    package.path = package.path .. ';' .. config_dir .. '/penlight/lua/?.lua'
-    require("pl.stringx").import()
+local function os_exec_rv(os_execute_ret)
     local version = tonumber(_VERSION:split(' ')[2])
     if version > 5.1 then
         return os_execute_ret
@@ -54,7 +65,7 @@ function os_exec_rv(os_execute_ret)
 end
 
 -- Gives the name of the program called in the command  ̀cmd`.
-local prg_name = function (cmd)
+local function prg_name(cmd)
     firstspace = cmd:find(" ")
     if firstspace then
         return cmd:sub(0, firstspace-1)
@@ -65,25 +76,25 @@ end
 
 -- Wrapper around pgrep program. Tells whether the called program from the
 -- command ̀cmd` is running or not
-function pgrep(cmd)
+local function pgrep(cmd)
     local prg = prg_name(cmd)
     local ret = os.execute("pgrep -u $USER -x " .. prg .. " > /dev/null")
     return os_exec_rv(ret)
 end
 
 -- Wrapper around pkill program. Kills the program. Returns pkill exec code.
-function pkill(cmd)
+local function pkill(cmd)
     local prg = prg_name(cmd)
     local ret = os.execute("pkill -u $USER -x " .. prg .. " > /dev/null")
     return os_exec_rv(ret)
 end
 
 -- Runs a command only if the program is not already running
-function run_once(cmd)
+local function run_once(cmd)
     if not pgrep(cmd) then awful.spawn.with_shell("(" .. cmd .. ")") end
 end
 
-function start_mail()
+local function start_mail()
     awful.spawn(terminal_cmd .. mail)
     -- this triggers offlineimap to use small window for recovering password
     -- (using pass/gpg)
@@ -92,7 +103,7 @@ end
 
 -- {{ sidemenu
 
-sidemenu = {
+local sidemenu = {
     default_style = {
         master_width_factor = 0.3,
         master_count        = 1,
@@ -117,9 +128,18 @@ function sidemenu:set_sidemenu_style(args)
     awful.layout.set(args and args.layout or sidemenu.default_style.layout)
 end
 
-function start_mail_calendar ()
+local function replicate_layout(tagid)
+    local s = awful.screen.focused()
+    local tag = s.tags[tagid]
+
+    tag.layout = s.selected_tag.layout
+    tag.master_count = s.selected_tag.master_count
+    tag.master_width_factor = s.selected_tag.master_width_factor
+end
+
+local function start_mail_calendar()
     awful.spawn(scnd_browser .. " " .. "-new-tab" .. " " .. "https://chat.ikb.info.uqam.ca/privsec-team/channels/town-square")
-    gears.timer.start_new(2, function ()
+    gears.timer.start_new(1, function ()
         start_mail()
         -- starting calendar
         awful.spawn(browser .. " " .. "--target window" .. " " .. "https://calendar.google.com/")
@@ -132,19 +152,49 @@ function start_mail_calendar ()
     sidemenu:set_sidemenu_style(sidemenu.mail_calendar_style)
 end
 
--- TODO: trouver comment utiliser `pass` pour les passwords...
--- {{{ Get passwords
-pass_process_list = {}
-function pass()
-    local helpers      = require("lain.helpers")
-    -- passwords = {}
-    -- passwords["mpd_bar"] = io.popen("pass" .. " " .. "personnel/mpd"):lines()()
-    -- for i,p in pairs(pass_process_list) do p(passwords[i]) end
-
-    mpdwidget.password = "q1w2e3r4"
-    -- mpdwidget.password = passwords["mpd_bar"]
+-- Returns the first valid ip address
+local function myip()
+    socket = require("socket")
+    mysocket = socket.udp()
+    mysocket:setpeername('8.8.8.8', "80")
+    ip,_ = mysocket:getsockname()
+    return ip
 end
--- local gears = require("gears")
--- local t = gears.timer({})
--- gears.timer:delayed_call(pass)
--- }}}
+
+return {
+    -- classes
+    sidemenu            = sidemenu,
+    -- variables
+    home_dir            = home_dir,
+    config_dir          = config_dir,
+    -- themes_dir          = themes_dir,
+    -- my_theme            = my_theme,
+    terminal            = terminal,
+    terminal_cmd        = terminal_cmd,
+    editor              = editor,
+    editor_cmd          = editor_cmd,
+    mpd_remote          = mpd_remote,
+    browser             = browser,
+    scnd_browser        = scnd_browser,
+    mail                = mail,
+    mpdclient           = mpdclient,
+    image_viewer        = image_viewer,
+    pamixer             = pamixer,
+    vmixer              = vmixer,
+    redshift            = redshift,
+    icon_exec           = icon_exec,
+    icon_dir            = icon_dir,
+    modkey              = modkey,
+    -- functions
+    powerset            = powerset,
+    async_dummy_cb      = async_dummy_cb,
+    os_exec_rv          = os_exec_rv,
+    pgrep               = pgrep,
+    pkill               = pkill,
+    run_once            = run_once,
+    start_mail          = start_mail,
+    replicate_layout    = replicate_layout,
+    set_sidemenu_style  = set_sidemenu_style,
+    start_mail_calendar = start_mail_calendar,
+    myip                = myip,
+}
