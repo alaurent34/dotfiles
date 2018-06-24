@@ -172,6 +172,9 @@ local temp = lain.widget.temp({
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_batt)
 local bat = lain.widget.bat({
+    -- Two batteries
+    ac = "AC",
+    batteries = {"BAT0", "BAT1"},
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
