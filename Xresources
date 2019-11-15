@@ -298,6 +298,11 @@ URxvt.keysym.C-minus: perl:font-size:decrease
 URxvt.keysym.C-0: perl:font-size:reset
 !--------------------------------------------
 
+URxvt.perl-ext-common:      solarized
+URxvt.keysym.Mod4-c:        perl:solarized:toggle
+URxvt.solarized.default:    light
+
+
 !Transparent background --------
 /* URxvt*.transparent: true 
 /* URxvt.tintColor: #373737 */

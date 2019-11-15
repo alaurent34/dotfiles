@@ -18,6 +18,7 @@ source /usr/bin/virtualenvwrapper.sh
 PATH=$PATH:~/bin/
 #Mendeleydesktop
 PATH=$PATH:~/bin/mendeleydesktop-1.19-linux-x86_64/bin/
+PATH=$PATH:~/bin/i3lock-fancy/
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export AURDEST=~/aur/other

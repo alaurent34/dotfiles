@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-scripts/wombat256.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --omnisharp-completer' }
 Plug 'tpope/vim-fugitive'
@@ -10,6 +11,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular' "Must load before vim-markdown (see :h vim-markdown)
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 Plug 'tpope/vim-abolish'        "correct typo
 Plug 'tpope/vim-surround'       "change surrounding of work \" -> \'
@@ -27,6 +29,7 @@ Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
 
 Plug 'vim-scripts/gnuplot.vim'
+Plug 'dpelle/vim-Grammalecte'
 
 call plug#end()
 
@@ -58,6 +61,10 @@ let g:syntaxed_fts = g:programming_fts + [
       \ "cmake",
       \ "make"
       \ ]
+
+let g:grammalecte_cli_py='/bin/grammalecte-cli.py'
+
+let g:livepreview_previewer = 'okular'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -156,10 +163,10 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 "TODO check pour mettre solarized en terminal
-"let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 
 try
-    colorscheme wombat256mod
+    colorscheme solarized
 catch
 endtry
 
