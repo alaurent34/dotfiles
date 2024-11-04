@@ -1,4 +1,4 @@
-SUBDIRS = awesome qutebrowser vim ranger mutt weechat conky #ncmpcpp beets
+SUBDIRS = awesome qutebrowser vim ranger mutt weechat conky doom.d #ncmpcpp beets
 
 DOTFILES = gitconfig vimrc Xresources Xmodmap zshrc zshrc.local fehbg offlineimaprc offlineimap.py msmtprc conkyrc-date.lua conkyrc-infos.lua synergy.conf xinitrc
 DEST_LINKS = $(addprefix $(HOME)/.,$(DOTFILES))
