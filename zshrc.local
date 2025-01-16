@@ -25,7 +25,14 @@ export AURDEST=~/aur/other
 export BROWSER=qutebrowser
 export PDFVIEWER=okular
 
+eval "$(direnv hook zsh)"
+
 stty -ixon
+
+# Always renew Kerberos creds at login
+if [ -f "/tmp/krb5cc_$(id -u)" ]; then
+    kinit -R
+fi  
 
 ###########################################
 #                   ZSH                   #

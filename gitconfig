@@ -18,5 +18,7 @@
     show       = show --show-signature
 [merge]
     tool       = vimdiff
+[core]
+    autocrlf   = true
 
 # vim:filetype=gitconfig:

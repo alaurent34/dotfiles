@@ -21,8 +21,11 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+                                        ; (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light))
+                                        ; doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 12 :weight 'semi-light)
+      doom-unicode-font (font-spec :family "FiraCode Nerd Font Mono" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font Mono" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -46,6 +49,13 @@
 
 
 (setq doom-theme 'spacemacs-light)
+
+;; maximize windows
+(setq frame-resize-pixelwise t)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; doesn't work on WSL with multiple screen
+;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
+;; (add-hook 'window-setup-hook #'toggle-frame-fullscreen)
 
 (custom-set-faces!
   '(doom-dashboard-banner :inherit default)
@@ -266,8 +276,10 @@ capture was not aborted."
 
 (use-package org-pandoc-import)
 
+(require 'dap-python)
 (after! dap-mode
-  (setq dap-python-debugger 'debugpy))
+  (setq dap-python-debugger 'debugpy)
+  )
 
 ;; Narrow buffer
 (use-package! olivetti
@@ -298,6 +310,8 @@ capture was not aborted."
      (http . t)
      (perl . t)
      (python . t)
+     (ipython . t)
+     (jupyter . t)
      (gnuplot . t)
      ;; org-babel does not currently support php.  That is really sad.
      ;;(php . t)
@@ -307,6 +321,7 @@ capture was not aborted."
      (sql . t)
      ;;(sqlite . t)
      )))
+
 (use-package! org
   :config
   (require 'org-tempo)
@@ -333,9 +348,10 @@ capture was not aborted."
 
 ;; (use-package! org-transclusion)
 
-;; (after! projectile
-;;   (dolist (project al/projects)
-;;     (projectile-add-known-project project)))
+(after! projectile
+  (setq projectile-project-search-path '(al/projects))
+  (projectile-discover-projects-in-directory al/projects 1)
+  )
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
