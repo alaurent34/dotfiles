@@ -19,6 +19,6 @@
 [merge]
     tool       = vimdiff
 [core]
-    autocrlf   = true
+    autocrlf   = false
 
 # vim:filetype=gitconfig:
