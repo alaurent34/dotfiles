@@ -1,4 +1,4 @@
-TARGETS    = config.el init.el package.el
+TARGETS    = config.el init.el packages.el
 DEST_DIR   = $(HOME)/.doomd
 DEST_LINKS = $(addprefix $(DEST_DIR)/,$(TARGETS))
 
