@@ -35,6 +35,7 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
+(add-to-list 'default-frame-alist '(undecorated . t))
 
 ;; Display
 
@@ -48,7 +49,8 @@
 (setq mixed-pitch-variable-pitch-cursor nil)
 
 
-(setq doom-theme 'spacemacs-light)
+;; (setq doom-theme 'spacemacs-light)
+(setq doom-theme 'doom-palenight)
 
 ;; maximize windows
 (setq frame-resize-pixelwise t)
@@ -99,6 +101,7 @@
   ;;(add-hook! 'org-mode-hook #'mixed-pitch-mode)
   ;;(add-hook! 'org-mode-hook #'olivetti-mode)
   (setq org-babel-python-command "python3")
+  (setq org-plantuml-jar-path (expand-file-name "~/.local/bin/plantuml/plantuml-1.2025.1.jar"))
   (setq org-cycle-separator-lines 1)
   (setq org-edit-src-content-indentation 0)
   (setq org-export-initial-scope 'subtree)
@@ -134,28 +137,28 @@
         '(("b" "Basic task for future review" entry
            (file+headline "tasks.org" "Basic tasks that need to be reviewed")
            "* %^{Title}\n:PROPERTIES:\n:CAPTURED: %U\n:END:\n\n%i%l"
-           :empty-lines 1)
+           :empty-lines 0)
 
           ("w" "Work")
           ("wt" "Task or assignment" entry
            (file+headline "work.org" "Tasks and assignments")
            "\n\n* TODO [#A] %^{Title} :@work:\nSCHEDULED: %^t\n:PROPERTIES:\n:CAPTURED: %U\n:END:\n\n%i%?"
-           :empty-lines 1)
+           :empty-lines 0)
 
           ("wm" "Meeting, event, appointment" entry
            (file+headline "work.org" "Meetings, events, and appointments")
            "\n\n* MEET [#A] %^{Title} :@work:\nSCHEDULED: %^T\n:PROPERTIES:\n:CAPTURED: %U\n:END:\n\n%i%?"
-           :empty-lines 1)
+           :empty-lines 0)
 
           ("t" "Task with a due date" entry
            (file+headline "tasks.org" "Task list with a date")
            "\n\n* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\nSCHEDULED: %^t\n:PROPERTIES:\n:CAPTURED: %U\n:END:\n\n%i%?"
-           :empty-lines 1)
+           :empty-lines 0)
 
           ("j" "Journal" entry
            (file+olp+datetree "journal.org")
            "* %?\n"
-           :empty-lines 1))))
+           :empty-lines 0))))
 
 (after! org-capture
   (defun org-hugo-new-subtree-post-capture-template ()
@@ -279,13 +282,25 @@ capture was not aborted."
 (require 'dap-python)
 (after! dap-mode
   (setq dap-python-debugger 'debugpy)
+  (dap-register-debug-template "lapin-study"
+                               (list :type "python"
+                                     :args "${file}"
+                                     :target-module "launch-study"
+                                     :module "lapin"
+                                     :cwd (expand-file-name "~/repos/lapin")
+                                     :env '(("DEBUG" . "1"))
+                                     :request "launch"
+                                     :name "LAPIN"))
   )
+
 
 ;; Narrow buffer
 (use-package! olivetti
+  :custom
+  (setq olivetti-body-width 180)
   :config
-  (setq-default olivetti-body-width 130)
-  (add-hook 'mixed-pitch-mode-hook  (lambda () (setq-local olivetti-body-width 80))))
+  (setq-default olivetti-body-width 180)
+  (add-hook 'mixed-pitch-mode-hook  (lambda () (setq-local olivetti-body-width 180))))
 
 (use-package! auto-olivetti
   :custom
@@ -351,6 +366,15 @@ capture was not aborted."
 (after! projectile
   (setq projectile-project-search-path '(al/projects))
   (projectile-discover-projects-in-directory al/projects 1)
+  )
+
+(after! plantuml-mode
+  (setq plantuml-jar-path "~/.local/bin/plantuml/plantuml-1.2025.1.jar")
+  (setq plantuml-default-exec-mode 'jar)
+  )
+
+(after! ox-latex
+  (add-to-list 'org-latex-classes '("letter" "\\documentclass{letter}"))
   )
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
