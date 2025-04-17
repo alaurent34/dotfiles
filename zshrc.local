@@ -19,6 +19,7 @@ PATH=$PATH:~/bin/
 #Mendeleydesktop
 PATH=$PATH:~/bin/mendeleydesktop-1.19-linux-x86_64/bin/
 PATH=$PATH:~/bin/i3lock-fancy/
+PATH=$PATH:~/.config/emacs/bin
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export AURDEST=~/aur/other
@@ -32,7 +33,7 @@ stty -ixon
 # Always renew Kerberos creds at login
 if [ -f "/tmp/krb5cc_$(id -u)" ]; then
     kinit -R
-fi  
+fi
 
 ###########################################
 #                   ZSH                   #
@@ -80,3 +81,9 @@ setopt PUSHD_IGNORE_DUPS
 ## This reverts the +/- operators.
 setopt PUSHD_MINUS
 # remembering old directories stop
+
+# WSL
+export BROWSER=wslview
+
+# DOOM
+export DOOMDIR='~/.doomd/'
