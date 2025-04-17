@@ -20,5 +20,7 @@
     tool       = vimdiff
 [core]
     autocrlf   = false
+[init]
+    defaultBranch = main
 
 # vim:filetype=gitconfig:
