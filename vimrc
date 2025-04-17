@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-scripts/wombat256.vim'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --omnisharp-completer' }
 Plug 'tpope/vim-fugitive'
@@ -157,20 +158,9 @@ endtry
 " Enable syntax highlighting
 syntax enable
 
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
-"TODO check pour mettre solarized en terminal
-" let g:solarized_termcolors=256
-
-try
-    colorscheme solarized
-catch
-endtry
-
 set background=dark
+autocmd vimenter * ++nested colorscheme solarized8_high
+" colorscheme solarized8_high
 
 " Set extra options when running in GUI mode
 if has("gui_running")
